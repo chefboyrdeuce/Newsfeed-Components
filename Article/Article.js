@@ -112,3 +112,78 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+
+console.log(data[0]);
+console.log(data[1]);
+console.log(data[2]);
+console.log(data[3]);
+
+function getArticle(){
+  const article = document.createElement('div');
+  article.classList.add('article');
+
+  const title = document.createElement('h2');
+  
+  const date = document.createElement('p');
+  date.classList.add('date');
+
+  const p1 = document.createElement('p');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
+
+  const span = document.createElement('span');
+  span.classList.add('expandButton');
+
+  return article;
+}
+
+console.log(getArticle());
+
+// Chris' map example
+const artdata = data.map((e) => {
+  return articles(e.title, e.date, e.firstParagraph, e.secondParagraph, e.thirdParagraph)
+ })
+
+
+
+
+
+
+
+
+// // function example from TK
+// function buttonCreator(buttonText){
+//   const button = document.createElement('button');
+
+//   button.textContent = buttonText;
+
+//   button.classList.add('button');
+
+//   button.addEventListener('click', (e) => {
+//       console.log('clicked!');
+//   });
+
+//   return button;
+// }
+
+// let firstButton = buttonCreator('Button 1');
+
+// let secondButton = buttonCreator('Button 2');
+
+// parent.appendChild(firstButton);
+// parent.appendChild(secondButton);
+
+// // forEach example from TK
+// data.forEach((arrayItem) => {
+//   let newButton = buttonCreator(arrayItem);
+
+//   parent.appendChild(newButton);
+// });
+
+// // map example from TK
+// let newComponents = data.map((arrayItem) => {
+//   let newButton = buttonCreator(arrayItem);
+
+//   // Remember, we always need to return something when we use .map
+//   return newButton;
+// });
