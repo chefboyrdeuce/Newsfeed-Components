@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'I have a networth of $2.5M',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -118,72 +134,54 @@ console.log(data[1]);
 console.log(data[2]);
 console.log(data[3]);
 
-function getArticle(){
+function getArticle(arrayItem){
   const article = document.createElement('div');
   article.classList.add('article');
 
-  const title = document.createElement('h2');
+  const h2 = document.createElement('h2');
+  h2.textContent = arrayItem.title;
   
   const date = document.createElement('p');
   date.classList.add('date');
 
   const p1 = document.createElement('p');
+  p1.textContent = arrayItem.firstParagraph;
   const p2 = document.createElement('p');
+  p2.textContent = arrayItem.secondParagraph;
   const p3 = document.createElement('p');
+  p3.textContent = arrayItem.thirdParagraph;
 
   const span = document.createElement('span');
   span.classList.add('expandButton');
+  span.textContent = ('expand');
+
+  span.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+    // article.classList.toggle('.article\.close');
+   });
+
+  article.appendChild(h2)
+  article.appendChild(date)
+  article.appendChild(p1)
+  article.appendChild(p2)
+  article.appendChild(p3)
+  article.appendChild(span)
 
   return article;
 }
 
-console.log(getArticle());
-
-// Chris' map example
-const artdata = data.map((e) => {
-  return articles(e.title, e.date, e.firstParagraph, e.secondParagraph, e.thirdParagraph)
- })
 
 
+let articles = data.map((arrayItem) => {
 
+  // Remember, we always need to return something when we use .map
+  return getArticle(arrayItem);
+});
 
+// console.log(articles);
+const classArticles = document.querySelector('.articles');
 
-
-
-
-// // function example from TK
-// function buttonCreator(buttonText){
-//   const button = document.createElement('button');
-
-//   button.textContent = buttonText;
-
-//   button.classList.add('button');
-
-//   button.addEventListener('click', (e) => {
-//       console.log('clicked!');
-//   });
-
-//   return button;
-// }
-
-// let firstButton = buttonCreator('Button 1');
-
-// let secondButton = buttonCreator('Button 2');
-
-// parent.appendChild(firstButton);
-// parent.appendChild(secondButton);
-
-// // forEach example from TK
-// data.forEach((arrayItem) => {
-//   let newButton = buttonCreator(arrayItem);
-
-//   parent.appendChild(newButton);
-// });
-
-// // map example from TK
-// let newComponents = data.map((arrayItem) => {
-//   let newButton = buttonCreator(arrayItem);
-
-//   // Remember, we always need to return something when we use .map
-//   return newButton;
-// });
+articles.forEach((element) => {
+  
+  classArticles.appendChild(element);
+});
